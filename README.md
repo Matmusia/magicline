@@ -41,7 +41,7 @@ tinymce.init({
     // Define the dashed line, button's background and arrows color
     magicline_color: '#4A8DE0',
     
-    // Array of Html element to check
+    // Array of Html elements to check
     magicline_targetedItems: ['DIV','IMG'],
     
     // Define the distance between the mouse and the targeted item
