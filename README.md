@@ -60,7 +60,7 @@ tinymce.init({
     magicline_triggerMargin: 20,
     
     // The element's tagname to insert
-    insertedBlockTag: 'p'
+    magicline_insertedBlockTag: 'p'
 });
 ```
 

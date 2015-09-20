@@ -22,7 +22,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		var color = editor.settings.magicline_color || "#4A8DE0",
 		    targetedItems = editor.settings.magicline_targetedItems || [ 'DIV', 'IMG' ],
 		    triggerMargin = editor.settings.magicline_triggerMargin || 20,
-			insertedBlockTag = editor.settings.insertedBlockTag || 'p';
+			insertedBlockTag = editor.settings.magicline_insertedBlockTag || 'p';
 		//-------------------------------------------
 
 		// Internal vars ----------------------------
