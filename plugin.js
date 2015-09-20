@@ -39,7 +39,8 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			isInline = ( editor.settings.inline === true ) ? true : false;
 		// ------------------------------------------
 
-		function getPosData( parent, tposY )
+		// Compute magicline position
+		function setPosData( parent, tposY )
 		{
 			parentBorderL = parseInt( DOM.getStyle( parent, 'border-left-width', true ) );
 			parentBorderR = parseInt( DOM.getStyle( parent, 'border-right-width', true ) );
@@ -72,7 +73,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			}
 		}
 
-		// Check mouse position and display linehelper if necessary
+		// Check mouse position and display magicline if necessary
 		function checkMouse( E )
 		{
 			target = $( E.target );
@@ -117,7 +118,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 					{
 						lastTargetPos = 'top';
 
-						getPosData( target.parent()[ 0 ], targetPos.y );
+						setPosData( target.parent()[ 0 ], targetPos.y );
 
 						DOM.setStyles( line,
 						               {
@@ -140,7 +141,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 					{
 						lastTargetPos = 'bottom';
 
-						getPosData( target.parent()[ 0 ], targetPos.y + targetSize.h );
+						setPosData( target.parent()[ 0 ], targetPos.y + targetSize.h );
 
 						DOM.setStyles( line,
 						               {
@@ -161,7 +162,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 		DOM.setStyle( rootElem, 'position', 'relative' );
 
-		// Create MagicLine Elements
+		// # Create MagicLine Elements ####
 		var line = DOM.create(
 			'div',
 			{
@@ -172,7 +173,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 				'data-mce-bogus': '1'
 			} );
 
-		// Dashed line
+		// | Dashed line
 		DOM.add( line, 'div',
 		         {
 			         'class':          'magicline-dashedline',
@@ -180,7 +181,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			         'data-mce-bogus': '1'
 		         } );
 
-		// Insert button
+		// | Insert button
 		var btInsert = DOM.add( line, 'div',
 		                        {
 			                        'class': 'magicline-bt_insert',
@@ -193,7 +194,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			                        'data-mce-bogus': '1'
 		                        } );
 
-		// Arrow left
+		// | Left Arrow
 		DOM.add( line, 'div',
 		         {
 			         'class': 'magicline-arrow-left',
@@ -203,7 +204,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			         'data-mce-bogus': '1'
 		         } );
 
-		// Arrow right
+		// | Right arrow
 		DOM.add( line, 'div',
 		         {
 			         'class': 'magicline-arrow-right',
@@ -213,7 +214,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			         'data-mce-bogus': '1'
 		         } );
 
-		// Click handle
+		// | 'click' event listener
 		DOM.bind( line, 'click',
 		          function ( E )
 		          {
