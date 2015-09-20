@@ -37,7 +37,7 @@ tinymce.init({
 });
 ```
 
-**Optionally**, some variables are available for you to customize the look and behavior of the plugin :
+**Optionally**, some variables are available for you to customize the look and behavior of the plugin (*Following values are the default ones*) :
 ```js
 tinymce.init({
     // Define the dashed line, button's background and arrows color
