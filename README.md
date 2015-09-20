@@ -63,5 +63,5 @@ For instance, the first *DIV* will trigger the display, but the second won't :
 <div class="nomagicline"></div>
 ```
 
-(The class '**nomagicline**' is automatically added to the [**valid_classes**] option by the plugin so it won't be stripped away by TinyMCE)
+(If necessary, the class '**nomagicline**' will automatically be added to the [**valid_classes**] option by the plugin so it won't be stripped away by TinyMCE)
 
