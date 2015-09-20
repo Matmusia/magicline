@@ -22,7 +22,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		var color = editor.settings.magicline_color || "#4A8DE0",
 		    targetedItems = editor.settings.magicline_targetedItems || [ 'DIV', 'IMG' ],
 		    triggerMargin = editor.settings.magicline_triggerMargin || 20,
-			insertedBlockTag = editor.settings.magicline_insertedBlockTag || 'p';
+		    insertedBlockTag = editor.settings.magicline_insertedBlockTag || 'p';
 		//-------------------------------------------
 
 		// Internal vars ----------------------------
@@ -36,7 +36,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		    $ = tinymce.dom.DomQuery,
 		    DOM = editor.dom,
 		    rootElem = editor.$()[ 0 ],
-			isInline = ( editor.settings.inline === true ) ? true : false;
+		    isInline = ( editor.settings.inline === true ) ? true : false;
 		// ------------------------------------------
 
 		// Compute magicline position
@@ -60,7 +60,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 				posY -= rootBorderT;
 			}
 
-			if( parent === rootElem )
+			if ( parent === rootElem )
 			{
 				width -= parentBorderL + parentBorderR;
 			}
@@ -105,9 +105,9 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 				targetSize = DOM.getSize( target[ 0 ] );
 				mouseY = E.pageY;
 
-				if( isInline ) mouseY -= DOM.getPos( rootElem ).y
+				if ( isInline ) mouseY -= DOM.getPos( rootElem ).y
 
-				if( !isBorderBox ) mouseY -= rootBorderT;
+				if ( !isBorderBox ) mouseY -= rootBorderT;
 
 				// Top
 				if ( Math.abs( targetPos.y - mouseY ) <= triggerMargin )
@@ -240,7 +240,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		editor.$().on( 'mousemove', function ( E )
 		{
 			clearTimeout( checkTimer );
-			checkTimer = setTimeout( checkMouse, 25, E );
+			checkTimer = setTimeout( function () { checkMouse( E ); }, 25 );
 		} );
 	} );
 
