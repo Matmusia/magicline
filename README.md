@@ -3,7 +3,7 @@
 Helps users to add new paragraphs in unreachable areas (*Between 2 consecutives blocks or images, before the first or after the last Html element, ...*).
 
 ### Some context...
-Switching from *CKEditor* to *TinyMCE* for various reasons, I was missing the MagicLine plugin very much !
+Having switched from *CKEditor* to *TinyMCE* for various reasons, I was missing the MagicLine plugin very much !
 I could'nt find anything close to that plugin for *TinyMCE*, so I've created one myself.
 
 I haven't checked how things are done in the *CKEdtor*'s version, so this plugin may not behave exactly as the original one.
@@ -57,8 +57,9 @@ tinymce.init({
 
 **Finaly**, if you dont want an element listed in [**magicline_targetedItems**] option to trigger the magicline display, you can add the CSS class '**nomagicline**' to it.
 
-For instance, this div won't trigger the display :
+For instance, the first *DIV* will trigger the display, but the second won't :
 ```html
+<div></div>
 <div class="nomagicline"></div>
 ```
 
