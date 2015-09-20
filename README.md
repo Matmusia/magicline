@@ -12,7 +12,7 @@ Helps users to add new paragraphs in unreachable areas (*Between 2 consecutives 
 ![](http://oi58.tinypic.com/348235g.jpg)
 
 ### Some context...
-Having switched from *CKEditor* to *TinyMCE* for various reasons, I was missing the MagicLine plugin very much !
+Having switched from *CKEditor* to *TinyMCE* for various reasons, I was missing the Magic Line plugin very much !
 I could'nt find anything close to that plugin for *TinyMCE*, so I've created one myself.
 
 I haven't checked how things are done in the *CKEdtor*'s version, so this plugin may not behave exactly as the original one.
