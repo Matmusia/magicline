@@ -5,6 +5,8 @@
  * Copyright (c) 2015 Matthias Musialowski
  */
 
+tinymce.PluginManager.requireLangPack( 'magicline', 'es,fr_FR' );
+
 tinymce.PluginManager.add( 'magicline', function ( editor, url )
 {
 	// Add [nomagicline] css class to editor.settings.valid_classes if necessary
@@ -36,7 +38,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		    $ = tinymce.dom.DomQuery,
 		    DOM = editor.dom,
 		    rootElem = editor.$()[ 0 ],
-		    isInline = ( editor.settings.inline === true ) ? true : false;
+		    isInline = ( editor.settings.inline === true );
 		// ------------------------------------------
 
 		// Compute magicline position
@@ -98,14 +100,14 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 			if ( foundBlock )
 			{
-				isBorderBox = ( DOM.getStyle( rootElem, 'box-sizing', true ) === 'border-box' ) ? true : false;
+				isBorderBox = ( DOM.getStyle( rootElem, 'box-sizing', true ) === 'border-box' );
 				rootBorderT = parseInt( DOM.getStyle( rootElem, 'border-top-width', true ) );
 
 				targetPos = DOM.getPos( target[ 0 ], rootElem );
 				targetSize = DOM.getSize( target[ 0 ] );
 				mouseY = E.pageY;
 
-				if ( isInline ) mouseY -= DOM.getPos( rootElem ).y
+				if ( isInline ) mouseY -= DOM.getPos( rootElem ).y;
 
 				if ( !isBorderBox ) mouseY -= rootBorderT;
 
@@ -189,7 +191,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 			                                          'font-size: 0;' +
 			                                          'color: white; background: url("' + url + '/img/icon.png") center no-repeat ' + color + ';' +
 			                                          'cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;',
-			                        title:            'Insert paragraph here',
+			                        title:            tinymce.util.I18n.translate( 'Insert paragraph here' ),
 			                        contentEditable:  'false',
 			                        'data-mce-bogus': '1'
 		                        } );

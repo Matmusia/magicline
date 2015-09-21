@@ -74,3 +74,9 @@ For instance, the first *DIV* will trigger the display, but the second won't :
 
 (If necessary, the class '**nomagicline**' will automatically be added to the [**valid_classes**] option by the plugin so it won't be stripped away by TinyMCE)
 
+### Languages
+
+* English
+* French
+* Spanish
+
