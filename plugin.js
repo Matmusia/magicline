@@ -17,6 +17,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 		editor.settings.valid_classes[ '*' ] = ( valid_classes != undefined ) ? valid_classes + ' nomagicline' : 'nomagicline';
 	}
+	else editor.settings.valid_classes = 'nomagicline';
 
 	editor.on( 'init', function ()
 	{
@@ -28,7 +29,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		//-------------------------------------------
 
 		// Internal vars ----------------------------
-		var target, lastTarget,
+		var magicline, target, lastTarget,
 		    parentPadL, parentPadR, parentBorderL, parentBorderR,
 		    prev, next, targetPos, targetSize,
 		    mouseY, foundBlock, lastTargetPos,
@@ -122,14 +123,16 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 						setPosData( target.parent()[ 0 ], targetPos.y );
 
-						DOM.setStyles( line,
+						if( DOM.getParents( magicline ).length <= 1 ) createMagicElements();
+
+						DOM.setStyles( magicline,
 						               {
 							               'top':   posY + 'px',
 							               'left':  posX + 'px',
 							               'width': width + 'px'
 						               } );
 
-						DOM.show( line );
+						DOM.show( magicline );
 					}
 
 					return;
@@ -145,98 +148,108 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 						setPosData( target.parent()[ 0 ], targetPos.y + targetSize.h );
 
-						DOM.setStyles( line,
+						if( DOM.getParents( magicline ).length <= 1 ) createMagicElements();
+
+						DOM.setStyles( magicline,
 						               {
 							               'top':   posY + 'px',
 							               'left':  posX + 'px',
 							               'width': width + 'px'
 						               } );
 
-						DOM.show( line );
+						DOM.show( magicline );
 					}
 
 					return;
 				}
 			}
 
-			DOM.hide( line );
+			DOM.hide( magicline );
 		}
 
 		DOM.setStyle( rootElem, 'position', 'relative' );
 
 		// # Create MagicLine Elements ####
-		var line = DOM.create(
-			'div',
-			{
-				'class': 'magicline-container',
-				style:   'width: 100%; position: absolute; display: block; top: 0; left: 0; margin: 0; padding: 0; height: ' + triggerMargin * 2 + 'px;' +
-				                  '-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;',
-				contentEditable:  'false',
-				'data-mce-bogus': '1'
-			} );
+		function createMagicElements()
+		{
+			console.log( 'create' );
+			if( magicline ) DOM.remove( magicline );
 
-		// | Dashed line
-		DOM.add( line, 'div',
-		         {
-			         'class':          'magicline-dashedline',
-			         style:            'position:absolute; top: 50%; left: 0; display: block; border: 0; border-top: 1px dashed ' + color + '; height: 0; width: 100%; margin: 0; padding: 0;',
-			         'data-mce-bogus': '1'
-		         } );
+			magicline = DOM.create(
+				'div',
+				{
+					'class': 'magicline-container',
+					style:   'width: 100%; position: absolute; display: block; top: 0; left: 0; margin: 0; padding: 0; height: ' + triggerMargin * 2 + 'px;' +
+					                  '-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;',
+					contentEditable:  'false',
+					'data-mce-bogus': '1'
+				} );
 
-		// | Insert button
-		var btInsert = DOM.add( line, 'div',
-		                        {
-			                        'class': 'magicline-bt_insert',
-			                        style:   'position: absolute; top: 50%; right: 25px; height: 16px; width: 16px; margin: 0; padding: 0; margin-top: -7px;' +
-			                                          'font-size: 0;' +
-			                                          'color: white; background: url("' + url + '/img/icon.png") center no-repeat ' + color + ';' +
-			                                          'cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;',
-			                        title:            tinymce.util.I18n.translate( 'Insert paragraph here' ),
-			                        contentEditable:  'false',
-			                        'data-mce-bogus': '1'
-		                        } );
+			// | Dashed line
+			DOM.add( magicline, 'div',
+			         {
+				         'class':          'magicline-dashedline',
+				         style:            'position:absolute; top: 50%; left: 0; display: block; border: 0; border-top: 1px dashed ' + color + '; height: 0; width: 100%; margin: 0; padding: 0;',
+				         'data-mce-bogus': '1'
+			         } );
 
-		// | Left Arrow
-		DOM.add( line, 'div',
-		         {
-			         'class': 'magicline-arrow-left',
-			         style:   'display: block; position: absolute; left: 0; top: 50%; height: 0; width: 0; margin: 0; padding: 0; margin-top: -7px;' +
-			                           'border: 8px solid transparent; border-left-color: ' + color + ';',
-			         contentEditable:  'false',
-			         'data-mce-bogus': '1'
-		         } );
+			// | Insert button
+			var btInsert = DOM.add( magicline, 'div',
+			                        {
+				                        'class': 'magicline-bt_insert',
+				                        style:   'position: absolute; top: 50%; right: 25px; height: 16px; width: 16px; margin: 0; padding: 0; margin-top: -7px;' +
+				                                          'font-size: 0;' +
+				                                          'color: white; background: url("' + url + '/img/icon.png") center no-repeat ' + color + ';' +
+				                                          'cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;',
+				                        title:            tinymce.util.I18n.translate( 'Insert paragraph here' ),
+				                        contentEditable:  'false',
+				                        'data-mce-bogus': '1'
+			                        } );
 
-		// | Right arrow
-		DOM.add( line, 'div',
-		         {
-			         'class': 'magicline-arrow-right',
-			         style:   'display: block; position: absolute; right: 0; top: 50%; height: 0; width: 0; margin: 0; padding: 0; margin-top: -7px;' +
-			                           'border: 8px solid transparent; border-right-color: ' + color + ';',
-			         contentEditable:  'false',
-			         'data-mce-bogus': '1'
-		         } );
+			// | Left Arrow
+			DOM.add( magicline, 'div',
+			         {
+				         'class': 'magicline-arrow-left',
+				         style:   'display: block; position: absolute; left: 0; top: 50%; height: 0; width: 0; margin: 0; padding: 0; margin-top: -7px;' +
+				                           'border: 8px solid transparent; border-left-color: ' + color + ';',
+				         contentEditable:  'false',
+				         'data-mce-bogus': '1'
+			         } );
 
-		// | 'click' event listener
-		DOM.bind( line, 'click',
-		          function ( E )
-		          {
-			          if ( E.target === btInsert )
+			// | Right arrow
+			DOM.add( magicline, 'div',
+			         {
+				         'class': 'magicline-arrow-right',
+				         style:   'display: block; position: absolute; right: 0; top: 50%; height: 0; width: 0; margin: 0; padding: 0; margin-top: -7px;' +
+				                           'border: 8px solid transparent; border-right-color: ' + color + ';',
+				         contentEditable:  'false',
+				         'data-mce-bogus': '1'
+			         } );
+
+			// | 'click' event listener
+			DOM.bind( magicline, 'click',
+			          function ( E )
 			          {
-				          editor.focus( false );
+				          if ( E.target === btInsert )
+				          {
+					          editor.focus( false );
 
-				          var p = DOM.create( insertedBlockTag, {}, '<br data-mce-bogus="1">' );
+					          var p = DOM.create( insertedBlockTag, {}, '<br data-mce-bogus="1">' );
 
-				          if ( lastTargetPos === 'top' ) lastTarget.before( p );
-				          else lastTarget.after( p );
+					          if ( lastTargetPos === 'top' ) lastTarget.before( p );
+					          else lastTarget.after( p );
 
-				          editor.selection.select( p, true );
-			          }
+					          editor.selection.select( p, true );
+				          }
 
-			          DOM.hide( line );
-		          } );
+				          DOM.hide( magicline );
+			          } );
 
-		DOM.hide( line );
-		DOM.add( rootElem, line );
+			DOM.hide( magicline );
+			DOM.add( rootElem, magicline );
+		}
+
+		createMagicElements();
 
 		// Listen to mouse move
 		editor.$().on( 'mousemove', function ( E )
