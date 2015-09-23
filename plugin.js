@@ -172,7 +172,6 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 		// # Create MagicLine Elements ####
 		function createMagicElements()
 		{
-			console.log( 'create' );
 			if( magicline ) DOM.remove( magicline );
 
 			magicline = DOM.create(
