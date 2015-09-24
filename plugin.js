@@ -17,7 +17,6 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 		editor.settings.valid_classes[ '*' ] = ( valid_classes != undefined ) ? valid_classes + ' nomagicline' : 'nomagicline';
 	}
-	else editor.settings.valid_classes = 'nomagicline';
 
 	editor.on( 'init', function ()
 	{
