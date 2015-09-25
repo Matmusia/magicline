@@ -1,3 +1,16 @@
+# V1.2 (2015-09-25)
+
+Bugfixes:
+
+* Remove valid_classes definition when not already defined by user
+
+     *Preventing Magicline plugin from removing all other CSS classes*
+     
+     
+* Remove forgotten log command
+
+
+
 # V1.1 (2015-09-23)
 
 Features :
