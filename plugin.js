@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Matthias Musialowski
  */
 
-tinymce.PluginManager.requireLangPack( 'magicline', 'es,fr_FR' );
+tinymce.PluginManager.requireLangPack( 'magicline', 'es,fr_FR,it,ro,ru' );
 
 tinymce.PluginManager.add( 'magicline', function ( editor, url )
 {
