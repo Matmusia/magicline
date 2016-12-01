@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Matthias Musialowski
  */
 
-tinymce.PluginManager.requireLangPack( 'magicline', 'es,fr_FR' );
+tinymce.PluginManager.requireLangPack( 'magicline', 'es,fr_FR,it,ro,ru' );
 
 tinymce.PluginManager.add( 'magicline', function ( editor, url )
 {
@@ -122,7 +122,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 						setPosData( target.parent()[ 0 ], targetPos.y );
 
-						if( DOM.getParents( magicline ).length <= 1 ) createMagicElements();
+						if( !rootElem.contains( magicline ) || DOM.getParents( magicline ).length <= 1 ) createMagicElements();
 
 						DOM.setStyles( magicline,
 						               {
@@ -147,7 +147,7 @@ tinymce.PluginManager.add( 'magicline', function ( editor, url )
 
 						setPosData( target.parent()[ 0 ], targetPos.y + targetSize.h );
 
-						if( DOM.getParents( magicline ).length <= 1 ) createMagicElements();
+						if( !rootElem.contains( magicline ) || DOM.getParents( magicline ).length <= 1 ) createMagicElements();
 
 						DOM.setStyles( magicline,
 						               {
